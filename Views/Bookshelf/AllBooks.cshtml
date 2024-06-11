@@ -1,0 +1,22 @@
+@model List<Book>;
+    
+@{
+    ViewData["Title"] = "Books";
+}
+
+<div class="text-left">
+    @if(Model is not null){
+        @foreach(var item in Model){
+            <th>
+                <a class="nav-link text-dark" href="/books/@item.Id">
+                    @Html.DisplayFor(modelItem => item.Title)
+                </a>
+            </th>
+        }
+    }
+</div>
+<div class="text-right">
+    <a class="btn btn-primary" href="/addbook">
+        add new book
+    </a>
+</div>

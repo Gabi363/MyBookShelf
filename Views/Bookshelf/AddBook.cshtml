@@ -1,0 +1,19 @@
+<h1>Add new book</h1>
+
+
+<form method="post" style="text-align: center;">
+    <label for="title" style="display: inline-block; width: 100px;">Title:</label>
+    <input type="text" id="title" name="title" /> <br />
+    <label for="author" style="display: inline-block; width: 100px;">Author:</label>
+    <input type="text" id="author" name="author" /> <br />
+    <label for="genre" style="display: inline-block; width: 100px;">Genre:</label>
+    <input type="text" id="genre" name="genre" /> <br />
+    <label for="description" style="display: inline-block; width: 100px;">Description:</label>
+    <input type="text" id="description" name="description" /> <br />
+
+    <input type="submit" value="Submit" asp-page-handler="Submit" />
+</form>
+
+@if (ViewData.ContainsKey("AddBookMessage")){
+    <h2>@ViewData["AddBookMessage"]</h2>
+}

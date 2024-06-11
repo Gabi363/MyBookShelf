@@ -1,0 +1,15 @@
+<h1>Add review</h1>
+
+
+<form method="post" style="text-align: center;">
+    <label for="rank" style="display: inline-block; width: 100px;">Rank:</label>
+    <input type="text" id="rank" name="rank" /> <br />
+    <label for="review" style="display: inline-block; width: 100px;">Review:</label>
+    <input type="review" id="review" name="review" /> <br />
+
+    <input type="submit" value="Submit" asp-page-handler="Submit" />
+</form>
+
+@if (ViewData.ContainsKey("ReviewMessage")){
+    <h2>@ViewData["ReviewMessage"]</h2>
+}

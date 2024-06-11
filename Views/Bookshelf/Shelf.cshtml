@@ -1,0 +1,130 @@
+@model List<BookStatus>;
+    
+@{
+    ViewData["Title"] = "Books";
+}
+
+
+    @* <h4>Want to read</h4>
+    @if(Model is not null){
+        @foreach(var item in Model){
+            @if(item.Status == "Want to read"){
+
+                <dl class="row">
+                    <dt class = "col-sm-2">
+                        <a class="nav-link text-dark" href="/books/@item.BookId">
+                            @Html.DisplayFor(modelItem => item.Book.Title)
+                        </a>    
+                    </dt>
+                    <dd class = "col-sm-10">
+                        <form asp-action="Shelf" method="post">
+                            <button type="submit" class="btn btn-primary" name="bookid" value="@item.BookId">delete</button>
+                        </form>    
+                    </dd>
+                </dl>
+            }
+            
+        }
+    }
+    <br>
+    <h4>Currently reading</h4>
+    @if(Model is not null){
+        @foreach(var item in Model){
+            @if(item.Status == "Currently reading"){
+                <dl class="row">
+                    <dt class = "col-sm-2">
+                        <a class="nav-link text-dark" href="/books/@item.BookId">
+                            @Html.DisplayFor(modelItem => item.Book.Title)
+                        </a>    
+                    </dt>
+                    <dd class = "col-sm-10">
+                        <form asp-action="Shelf" method="post">
+                            <button type="submit" class="btn btn-primary" name="bookid" value="@item.BookId">delete</button>
+                        </form>    
+                    </dd>
+                </dl>
+            }
+            
+        }
+    }
+    <br>
+    <h4>Read</h4>
+    @if(Model is not null){
+        @foreach(var item in Model){
+            @if(item.Status == "Read"){
+                <dl class="row">
+                    <dt class = "col-sm-10">
+                        <a class="nav-link text-dark" href="/books/@item.BookId">
+                            @Html.DisplayFor(modelItem => item.Book.Title)
+                        </a>    
+                    </dt>
+                    <dd class = "col-sm-10">
+                        <form asp-action="Shelf" method="post">
+                            <button type="submit" class="btn btn-primary" name="bookid" value="@item.BookId">delete</button>
+                        </form>    
+                    </dd>
+                </dl>
+            }
+            
+        }
+    } *@
+
+
+
+
+
+
+
+<div class="text-left">
+    <h4>Want to read</h4>
+    @if(Model is not null){
+        @foreach(var item in Model){
+            @if(item.Status == "Want to read"){
+                    <a class="nav-link text-dark" href="/books/@item.BookId">
+                        @Html.DisplayFor(modelItem => item.Book.Title)
+                    </a>
+
+                    <form asp-action="Shelf" method="post">
+                        <button type="submit" class="btn btn-primary" name="bookid" value="@item.BookId">delete</button>
+                    </form>
+            }
+            
+        }
+    }
+    <br>
+    <h4>Currently reading</h4>
+    @if(Model is not null){
+        @foreach(var item in Model){
+            @if(item.Status == "Currently reading"){
+                <th>
+                    <a class="nav-link text-dark" href="/books/@item.BookId">
+                        @Html.DisplayFor(modelItem => item.Book.Title)
+                    </a>
+                    <form asp-action="Shelf" method="post">
+                        <button type="submit" class="btn btn-primary" name="bookid" value="@item.BookId">delete</button>
+                    </form>
+                </th>
+            }
+            
+        }
+    }
+    <br>
+    <h4>Read</h4>
+    @if(Model is not null){
+        @foreach(var item in Model){
+            @if(item.Status == "Read"){
+                <th>
+                    <a class="nav-link text-dark" href="/books/@item.BookId">
+                        @Html.DisplayFor(modelItem => item.Book.Title)
+                    </a>
+                    <form asp-action="Shelf" method="post">
+                        <button type="submit" class="btn btn-primary" name="bookid" value="@item.BookId">delete</button>
+                    </form>
+                </th>
+            }
+            
+        }
+    }
+
+</div>
+

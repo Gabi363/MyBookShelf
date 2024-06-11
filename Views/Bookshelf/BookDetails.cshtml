@@ -1,0 +1,125 @@
+@model BookWithStatus
+
+@{
+    ViewData["Title"] = "Book details";
+}
+
+<div>
+    <h4>Book details</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Author)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Author)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Genre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Genre)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class = "col-sm-2">
+            Average rank
+        </dt>
+        @if(Model.Average == 0){
+            <dd class = "col-sm-10">
+                -
+            </dd>
+        } else{
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Average)
+            </dd>            
+        }
+
+        
+    </dl>
+
+
+    @* <a href='@Url.Action("SetStatus", "Bookshelf")'> click me </a>  *@
+    @if(ViewData["IsAdmin"].ToString() != "True"){
+        <form asp-action="BookDetails" method="post">
+            <button type="submit" class="btn btn-primary" name="status" value="Want to read">Want to read</button>
+            <button type="submit" class="btn btn-primary" name="status" value="Currently reading">Currently reading</button>
+            <button type="submit" class="btn btn-primary" name="status" value="Read">Read</button>
+
+        </form>
+    }
+    @* <div class="form-group">
+        <a asp-controller="Bookshelf" asp-action="BookDetails">
+            <input name="status" type="button" value="WantToRead" />
+        </a>
+    </div> *@
+
+
+    <br>
+    <br>
+    @if(Model.Status != default){
+        <dl class="row">
+            <dt class = "col-sm-2">
+                Your status
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Status)
+            </dd>
+        </dl>
+    }
+
+
+    <br>
+    <br>
+    <h4>Reviews</h4>
+    <hr />
+    @if(Model.Opinions is not null){
+        @foreach(var opinion in Model.Opinions){
+            @if(opinion.BookId.ToString() == ViewData["bookid"].ToString()){
+                <dl class="row">
+                    <dt class = "col-sm-2">
+                        User
+                    </dt>
+                    <dd class = "col-sm-10">
+                        @opinion.User.Username
+                    </dd>
+                </dl>   
+                <dl class="row">
+                    <dt class = "col-sm-2">
+                        Rank
+                    </dt>
+                    <dd class = "col-sm-10">
+                        @opinion.Rank
+                    </dd>
+                </dl>   
+                <dl class="row">
+                    <dt class = "col-sm-2">
+                        Review
+                    </dt>
+                    <dd class = "col-sm-10">
+                        @opinion.Review
+                    </dd>
+                </dl>         
+            }
+            <hr />
+        }
+    }
+
+    @if(ViewData["IsAdmin"] is not null && ViewData["IsAdmin"].ToString() != "True"){
+
+        <a class="btn btn-primary" href="/addreview/@Model.Id">
+            add review
+        </a>
+    }
+
+</div>
